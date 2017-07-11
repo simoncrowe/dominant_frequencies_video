@@ -2,28 +2,22 @@ from moviepy.video.io.VideoFileClip import VideoFileClip
 from moviepy.audio.io.AudioFileClip import AudioFileClip
 from colorsys import rgb_to_hls, hls_to_rgb
 import numpy as np
+from scipy.io.wavfile import read as wavread
 import time
 
 TESTING = False
 
 
 class VideoFileFreqAnalyser():
-    def __init__(self, filepath, sample_rate = 44100):
-        self.video = VideoFileClip(filepath, audio = False)
-        #self.video.fps = video.fps
-        self.sample_rate = sample_rate
-        audio_array = AudioFileClip(filepath, fps=sample_rate).to_soundarray()
-        self.audio = self.mix_sterio(audio_array) # may retain sterio if desired
-        frame_count = int((len(self.audio) / sample_rate) * self.video.fps) + 1
-        self.frame_count_appox = (len(self.audio)/sample_rate) * self.video.fps
-		#self.video = np.empty((frame_count), dtype=object)
-        #frame_number = 0
-        #print('Loading video...')
-        #for f in video.iter_frames():
-            #self.video[frame_number] = f
-            #frame_number += 1
-        #self.frame_count = len(self.video)
-        #print('Finished loading video ' + str(len(self.video))+' frames!')
+    def __init__(self, video_path, audio_path):
+        self.video = VideoFileClip(video_path, audio = False)
+        audio_array = wavread(audio_path)
+        self.audio = audio_array[1]
+        self.sample_rate = audio_array[0]
+        #self.audio = self.mix_sterio(audio_arrayana) # may retain sterio if desired
+        self.frame_count_appox = ((len(self.audio)/self.sample_rate) 
+                                                    * self.video.fps)
+
 
 
     def mix_sterio(self, sterio_channels):
