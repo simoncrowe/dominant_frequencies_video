@@ -5,7 +5,7 @@ import numpy as np
 from scipy.io.wavfile import read as wavread
 import time
 
-TESTING = True
+TESTING = False
 
 
 class VideoFileFreqAnalyser():
