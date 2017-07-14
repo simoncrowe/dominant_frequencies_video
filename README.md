@@ -19,7 +19,7 @@ i.e. analyser.get_dominant_hue(900)
 
 - Use the get_dominant_frequency(frame_number) function to get the frequency of the samples for a particular frame in Hertz.
 
-*_Due to efficiency issues with moviepy's handling of audio, the audio must be loaded as a separate WAV file. This file can be created using ffmpeg_
+*_Due to efficiency issues with moviepy's handling of audio, the audio must be loaded as a separate WAV file. This file should be a single-channel WAV, ideally using 16 bit signed integers and can be created using ffmpeg.
 
 i.e. ffmpeg -i video.mp4 -vn -acodec pcm_s16le -ar 44100 -ac 1 audio.wav
 
