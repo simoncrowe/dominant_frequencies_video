@@ -1,7 +1,7 @@
 ## dominant_frequencies_video
 Provides methods for getting dominant pixel hue and audio frequency from a given frame of a video file.
 ## To use
-- Clone the repository to where you want to work on it. 
+- Clone the repository to where the script you want to use it in is located. 
 
 i.e. git clone https://github.com/simoncrowe/dominant_frequencies_video
 
