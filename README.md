@@ -9,9 +9,9 @@ Import it into your script.
 
     from dominant_frequencies_video.av_frequencies import VideoFileFreqAnalyser
 
-Create a VideoFileFreqAnalyser instance with your audio and video files. 
+Create a VideoFileFreqAnalyser instance with your audio and video files.* 
 
-    analyser =  VideoFileFreqAnalyser('video.mp4', 'audio.wav') *
+    analyser =  VideoFileFreqAnalyser('video.mp4', 'audio.wav')
 
 Use the get_dominant_hue(frame_number, sample_spacing = 32, hue_granularity = 256, segments= (1, 1)) function to get hue values 
 
