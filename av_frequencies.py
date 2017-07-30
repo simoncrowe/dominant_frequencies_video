@@ -89,7 +89,7 @@ class VideoFileFreqAnalyser():
             i += 1
         bad_hue_count = 0
         for h in hues:
-            for hue_band in range(hue_granularity - 1, -1, -1): # Back iterate
+            for hue_band in reversed(range(hue_granularity)):
                 try:
                     if h > hue_band_thresholds[hue_band]:
                         hue_counts[hue_band] += 1
@@ -102,7 +102,8 @@ class VideoFileFreqAnalyser():
                     if TESTING:
                         print('Skipping bad hue: ' + str(h))
                     bad_hue_count += 1
-        print(str(bad_hue_count) + ' bad hue values found!')
+        if TESTING:
+            print(str(bad_hue_count) + ' bad hue values found!')
         
         dominant_hue_index = 0
         greatest_hue_count = 0
