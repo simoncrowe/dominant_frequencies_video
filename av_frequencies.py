@@ -15,8 +15,8 @@ class VideoFileFreqAnalyser():
         self.audio = audio_array[1]
         self.sample_rate = audio_array[0]
         #self.audio = self.mix_sterio(audio_arrayana) # may retain sterio if desired
-        self.frame_count_appox = ((len(self.audio)/self.sample_rate) 
-                                                    * self.video.fps)
+        self.frame_count_appox = int(((len(self.audio)/self.sample_rate) 
+                                                    * self.video.fps))
 
 
 
@@ -41,7 +41,7 @@ class VideoFileFreqAnalyser():
                         /sample_spacing) *
                         int((vertical_range[1] - vertical_range[0])
                         /sample_spacing))
-        hues = np.empty((sample_count), dtype = float)
+        hues = []
         hue_index = 0
         if TESTING:
             print('Max vertical = ' 
@@ -60,7 +60,9 @@ class VideoFileFreqAnalyser():
                 #print(frame[y*sample_spacing][x*sample_spacing][0])
                 #print(r)
                 #print(int((rgb_to_hls(r, g, b))[0] * 360.0))
-                hues[hue_index] = rgb_to_hls(r, g, b)[0]
+                hue = rgb_to_hls(r, g, b)[0]
+                if hue != None:
+                    hues.append(hue)
 
 
                 #if hues[hue_index] < 0:
@@ -68,7 +70,7 @@ class VideoFileFreqAnalyser():
                 #        + str(x*sample_spacing))
                 #    print(hues[hue_index])
                 #print(hues[pixel_index])
-                hue_index += 1
+                #hue_index += 1
         return hues
         
     def find_modal_hue(self, hues, hue_granularity):
@@ -103,7 +105,7 @@ class VideoFileFreqAnalyser():
                         print('Skipping bad hue: ' + str(h))
                     bad_hue_count += 1   
                     matched = True # LIES!
-                    
+        print(str(bad_hue_count) + ' bad hue values found!')
         dominant_hue_index = 0
         greatest_hue_count = 0
         for i in range(len(hue_counts)):
