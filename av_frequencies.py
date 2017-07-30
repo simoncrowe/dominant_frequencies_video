@@ -97,13 +97,11 @@ class VideoFileFreqAnalyser():
                 except TypeError:
                     if TESTING:
                         print('Skipping bad hue: ' + str(h))
-                    matched = True # LIES!
                     bad_hue_count += 1
                 except IndexError:
                     if TESTING:
                         print('Skipping bad hue: ' + str(h))
-                    bad_hue_count += 1   
-                    matched = True # LIES!
+                    bad_hue_count += 1
 
         print(str(bad_hue_count) + ' bad hue values found!')
         dominant_hue_index = 0
