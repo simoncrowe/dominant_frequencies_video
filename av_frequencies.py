@@ -102,14 +102,13 @@ class VideoFileFreqAnalyser():
                     if TESTING:
                         print('Skipping bad hue: ' + str(h))
                     bad_hue_count += 1
-
         print(str(bad_hue_count) + ' bad hue values found!')
+        
         dominant_hue_index = 0
         greatest_hue_count = 0
         for i in range(len(hue_counts)):
             if (hue_counts[i] > greatest_hue_count):
                 greatest_hue_count = hue_counts[i]
-                #print('Hue index ' + str(i) + 'is greatest:' + str(greatest_hue_count))
                 dominant_hue_index = i
                 
         return float(hue_band_values[dominant_hue_index])
