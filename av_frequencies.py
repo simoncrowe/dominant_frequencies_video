@@ -14,18 +14,8 @@ class VideoFileFreqAnalyser():
         audio_array = wavread(audio_path)
         self.audio = audio_array[1]
         self.sample_rate = audio_array[0]
-        #self.audio = self.mix_sterio(audio_arrayana) # may retain sterio if desired
         self.frame_count_appox = int(((len(self.audio)/self.sample_rate) 
                                                     * self.video.fps))
-
-
-
-    def mix_sterio(self, sterio_channels):
-        mono_shape = (len(sterio_channels))
-        mono_channel = np.empty(mono_shape, dtype = np.float)
-        for i in range(len(mono_channel)):
-            mono_channel[i] = sterio_channels[i][0] + sterio_channels[i][1]
-        return mono_channel
 
     def get_hues(self, 
                 frame, 
@@ -57,20 +47,10 @@ class VideoFileFreqAnalyser():
                 r = float(frame[y*sample_spacing, x*sample_spacing][0]) / 255.0
                 g = float(frame[y*sample_spacing, x*sample_spacing][1]) / 255.0
                 b = float(frame[y*sample_spacing, x*sample_spacing][2]) / 255.0
-                #print(frame[y*sample_spacing][x*sample_spacing][0])
-                #print(r)
-                #print(int((rgb_to_hls(r, g, b))[0] * 360.0))
+                
                 hue = rgb_to_hls(r, g, b)[0]
                 if hue != None:
                     hues.append(hue)
-
-
-                #if hues[hue_index] < 0:
-                #    print('Bad hue value at ' + str(y*sample_spacing) + ', ' 
-                #        + str(x*sample_spacing))
-                #    print(hues[hue_index])
-                #print(hues[pixel_index])
-                #hue_index += 1
         return hues
         
     def find_modal_hue(self, hues, hue_granularity):
@@ -172,9 +152,6 @@ class VideoFileFreqAnalyser():
             print('Starting FFT processing at time: ' + str(time.time()))
         w = np.fft.fft(frame_samples)
         freqs = np.fft.fftfreq(len(w))
-        #print(freqs.min(), freqs.max())
-        # (-0.5, 0.499975)
-        # Find the peak in the coefficients
         idx = np.argmax(np.abs(w))
         freq = freqs[idx]
         freq_in_hertz = abs(freq * self.sample_rate)
