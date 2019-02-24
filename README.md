@@ -23,7 +23,7 @@ Use the get_dominant_frequency(frame_number) function to get the frequency of th
 
     ffmpeg -i video.mp4 -vn -acodec pcm_s16le -ar 44100 -ac 1 audio.wav
 
- ## Other possibe uses
+ ## Other possible uses
 
 While this script has quite a limited use case, some of its functionality could be re-used. The main functions of interest are:
 - Getting the dominant frequency in Hertz from an array of audio samples using the fast Fourier transform from the numpy library. The most useful thing here is that the FFT data is generated and other analyses could be carried out on it.
